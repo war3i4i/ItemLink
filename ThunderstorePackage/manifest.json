@@ -1,0 +1,9 @@
+{
+  "name": "Item_Link",
+  "version_number": "1.1.0",
+  "website_url": "",
+  "description": "Mod that allows you to link your item in chat. As in MMORPGs",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2202"
+  ]
+}
