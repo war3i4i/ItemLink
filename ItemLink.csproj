@@ -9,7 +9,7 @@
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>ItemLink</RootNamespace>
-        <AssemblyName>ItemLink</AssemblyName>
+        <AssemblyName>kg.ItemLink</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>latest</LangVersion>
@@ -49,8 +49,6 @@
     </ItemGroup>
     <ItemGroup>
       <Content Include="ThunderstorePackage\icon.png" />
-      <Content Include="ThunderstorePackage\ItemLink.dll" />
-      <Content Include="ThunderstorePackage\ItemLink.dll.mdb" />
       <Content Include="ThunderstorePackage\manifest.json" />
       <Content Include="ThunderstorePackage\README.md" />
     </ItemGroup>
@@ -78,6 +76,9 @@
       </Reference>
       <Reference Include="Jewelcrafting">
         <HintPath>Libs\JewelcraftingAPI.dll</HintPath>
+      </Reference>
+      <Reference Include="Splatform">
+        <HintPath>Libs\Splatform.dll</HintPath>
       </Reference>
       <Reference Include="System" />
       <Reference Include="Unity.TextMeshPro">
@@ -132,7 +133,7 @@
 
         <Exec Command="copy /Y &quot;$(TargetDir)$(AssemblyName).dll&quot; &quot;$(ProjectDir)ThunderstorePackage\$(AssemblyName).dll&quot;" />
         <Exec Command="copy /Y &quot;$(TargetDir)$(AssemblyName).dll.mdb&quot; &quot;$(ProjectDir)ThunderstorePackage\$(AssemblyName).dll.mdb&quot;" />
-    </Target>
+    </Target> 
     
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     

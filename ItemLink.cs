@@ -16,9 +16,9 @@ namespace ItemLink
     [BepInIncompatibility("redseiko.valheim.chatter")]
     public class ItemLink : BaseUnityPlugin 
     {
-        private const string GUID = "kg.ItemLink";
+        private const string GUID = "kg.ItemLink"; 
         private const string NAME = "ItemLink";
-        private const string VERSION = "1.1.0";
+        private const string VERSION = "1.2.0";
 
         private static ItemLink _thistype;
         private static AssetBundle asset;

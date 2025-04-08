@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using fastJSON;
 using HarmonyLib;
 using JetBrains.Annotations;
 using Jewelcrafting;
-using TMPro;
+using TMPro; 
 using UnityEngine; 
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -58,7 +59,7 @@ namespace ItemLink
         {
             if (Chat.instance.m_input is {} chat && !chat.GetComponent<ItemLinkProcessor>())
             {
-                __instance.m_output.raycastTarget = true;
+                __instance.m_output.raycastTarget = true; 
                 chat.gameObject.AddComponent<ItemLinkProcessor>();
             }
         }
@@ -89,7 +90,7 @@ namespace ItemLink
                 }; 
                 string json = fastJSON.JSON.ToJSON(toCollect);
                 UserInfo userInfo = UserInfo.GetLocalUser();
-                userInfo.Name += $" [{type}]";
+                userInfo.Name += $" [{type}]";  
                 ZRoutedRpc.instance.InvokeRoutedRPC(ZRoutedRpc.Everybody, "RPC_KG_ItemLink", [userInfo, json]);
                 return false;
             }
@@ -118,14 +119,14 @@ namespace ItemLink
                 text = $"<link=\"{KEY}{newLink}\"><color=#ffbf00><u><b>[•{hookName}{addStack}]</b></u></color></link>";
             }
             catch (Exception ex)
-            {
+            { 
                 text = "<color=red>[kg.ItemLink] Wrong Data</color>";
                 MonoBehaviour.print($"[kg.ItemLink] Error: {ex}");
-            }
+            } 
             Chat.instance.m_hideTimer = 0f;
-            Chat.instance.AddString(userInfo.Name + UserInfo.GamertagSuffix(userInfo.Gamertag), text, Talker.Type.Normal, false);
+            Chat.instance.AddString(userInfo.Name, text, Talker.Type.Normal, false);
         }
-    }
+    } 
     
     public class ItemLinkProcessor : MonoBehaviour
     {
@@ -205,12 +206,12 @@ namespace ItemLink
                 OnDisable();
             
             ProcessTMP(tryFindLink);
-        } 
+        }   
 
         private GameObject CreateTooltipForItemLinkData(ItemLink_Data itemLinkData,  string additionalText = "")
         {
             GetItemData(itemLinkData, out string hookName, out string hookText, out Sprite hookIcon, out ItemDrop.ItemData item);
-            GameObject result = Instantiate(TooltipPrefab, Hud.instance.transform.parent);
+            GameObject result = Instantiate(TooltipPrefab, Chat.instance.transform.parent);
             result.transform.Find("Bkg/Icon").GetComponent<Image>().sprite = hookIcon;
             result.transform.Find("Bkg/Icon").GetComponent<Image>().type = Image.Type.Sliced;
             result.transform.Find("Bkg/Topic").GetComponent<Text>().text = Localization.instance.Localize(hookName) + additionalText;
@@ -229,7 +230,7 @@ namespace ItemLink
                 }
             }
             return result;
-        }
+        } 
          
         private GameObject CreateCompareTooltip(ItemDrop.ItemData item, int index, string additionalText = "")
         {
@@ -256,13 +257,13 @@ namespace ItemLink
                 text = "Unknown";
                 icon = null!;
                 return;
-            }
+            }  
             ItemDrop.ItemData origData = prefab.GetComponent<ItemDrop>().m_itemData;
             ItemDrop.ItemData.SharedData mainSharedData = origData.m_shared;
             Dictionary<string, string> mainCustomData = origData.m_customData;
             origData.m_shared = (ItemDrop.ItemData.SharedData)AccessTools.DeclaredMethod(typeof(object), "MemberwiseClone").Invoke(mainSharedData, Array.Empty<object>());
             origData.m_customData = fastJSON.JSON.ToObject<Dictionary<string, string>>(itemLinkData.CustomData);
-            item = origData.Clone(); 
+            item = origData.Clone();  
             origData.m_customData = mainCustomData;
             origData.m_shared = mainSharedData;
             
@@ -281,6 +282,8 @@ namespace ItemLink
             topic = Localization.instance.Localize(littleTrick.m_topic);
             text = Localization.instance.Localize(littleTrick.m_text);
             icon = item.GetIcon(); 
+            
+            MonoBehaviour.print($"Custom data of tooltip is: {fastJSON.JSON.ToNiceJSON(item.m_customData)}");
         }
         
         public static void GetItemData(ItemDrop.ItemData item, out string topic, out string text, out Sprite icon)

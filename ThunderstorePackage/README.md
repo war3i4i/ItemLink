@@ -13,10 +13,11 @@ Like my mods? Support me: `war3spells@gmail.com` (Paypal)
     Patchnotes
 </span></b></summary>
 
-| Version | Changes               |
-|---------|-----------------------|
-| 1.1.0   | Some internal changes |
-| 1.0.0   | Mod released          |
+| Version | Changes                       |
+|---------|-------------------------------|
+| 1.2.0   | Updated for new Valheim patch |
+| 1.1.0   | Some internal changes         |
+| 1.0.0   | Mod released                  |
 </details>
 
 ####  Questions or Comments, find KG in the Odin Plus Discord:
